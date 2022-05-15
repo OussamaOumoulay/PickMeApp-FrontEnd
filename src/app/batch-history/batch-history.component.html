@@ -1,0 +1,21 @@
+<br>
+<br><br><br><br><br>
+
+<div style="width: 90rem" class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Historiques des Batch</div>
+    <br>
+    <div class="panel-body">
+      <table *ngIf="batchHistories" class="table table-striped">
+        <tr>
+          <th>ID</th><th>BatchName</th><th>Status</th>
+        <tr *ngFor="let p of batchHistories._embedded.batchHistories">
+          <td>{{p.id}}</td>
+          <td>{{p.batchName}}</td>
+        <td *ngIf="p.status=='Executed'" style="color: blue">{{p.status}}</td>
+        <td *ngIf="p.status=='Error'" style="color: crimson">{{p.status}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

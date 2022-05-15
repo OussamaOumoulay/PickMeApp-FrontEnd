@@ -1,0 +1,97 @@
+
+<br>
+<br><br><br><br><br>
+
+<div style="width: 65rem" class="container">
+   <div class="panel panel-primary panel">
+     <div class="panel-heading">Liste des batch</div>
+     <br>
+       <button class="btn btn-success" (click)="onNewBatch()"><span class="glyphicon glyphicon-plus">
+       </span>Ajouter Batch</button>
+<div *ngIf="mode=='new-bacth'">
+  <form #f="ngForm" (ngSubmit)="onSaveBatch(f.value)">
+    <div class="panel-body">
+    <div class="form-group">
+      <label class="control-label">batchName</label>
+      <input STYLE="width: 20rem" type="text" name="batchName" ngModel class="form-control">
+    </div>
+    <div class="form-group">
+      <label class="control-label">Type</label>
+      <select name="etat" [(ngModel)]="defaultValue">
+        <option value="true" >Automatic</option>
+        <option value="false">Manuel</option>
+      </select>
+    </div>
+    </div>
+    <div class="form-group">
+    <button class="btn btn-success" type="submit">save</button>
+      <button class="btn btn-danger" (click)="mode='else'" type="button">Cancel</button>
+    </div>
+  </form>
+
+     </div>
+        <div class="panel-body">
+          <table *ngIf="batches" class="table table-striped">
+            <tr>
+              <th>ID</th><th>BatchName</th>
+            </tr>
+            <tr *ngFor="let p of batches._embedded.batches">
+             <td>{{p.id}}</td>
+              <td>{{p.batchName}}</td>
+              <div class="m-auto" *ngIf="p.etat==true">
+                <td><a style="width: 91px" class="btn btn-success" (click)="EtatActived(p)">Activer</a></td>
+                <td><a style="width: 91px" class="btn btn-primary" (click)="Execute(p)" data-toggle="modal" data-target="#exampleModal">Executer</a></td>
+                <td><a style="width: 91px" class="btn btn-danger" (click)="onDeleteBatch(p)">Delete</a></td>
+              </div>
+              <div *ngIf="p.etat==false">
+                <td><a style="width: 91px" class="btn btn-danger" (click)="EtatDesactived(p)">Desactiver</a></td>
+                <td><a style="width: 91px" class="btn btn-primary" (click)="Execute(p)" data-toggle="modal" data-target="#exampleModal">Executer</a></td>
+                <td><a style="width: 91px" class="btn btn-danger" (click)="onDeleteBatch(p)">Delete</a></td>
+              </div>
+            </tr>
+          </table>
+        </div>
+   </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Parametrer Batch</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #f="ngForm" *ngIf="mode=='open'"  (ngSubmit)="onUpdate(f.value)">
+          <div class="form-group">
+            <label for="codeProduit">Produit</label>
+            <select style="width: 91px" id="codeProduit" name="codeProduit" ngModel value="555">
+              <option *ngFor = "let g of produits._embedded.produits "
+                      [value] = "g.codeProduit"> {{g.libelle_CodeProduit}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="reseau">Reseau</label>
+            <select style="width: 91px" id="reseau" name="reseau" ngModel>
+              <option *ngFor = "let g of reseau._embedded.reseaus"
+                      [value] = "g.codeReseau"> {{g.libelle_Reseau}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="control-label">dateEcheance</label>
+            <input style="width: 250px" class="form-control" type="date" name="dateEcheance" value=""ngModel>
+          </div>
+          <input style="width: 350px" type="file" (change)="fileChanged($event);" webkitdirectory mozdirectory msdirectory odirectory directory multiple="multiple" />
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Annulez</button>
+            <button type="submit" class="btn btn-primary">Executez</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

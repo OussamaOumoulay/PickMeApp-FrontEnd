@@ -1,0 +1,40 @@
+
+<body>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#" style="color: crimson">Wafa Batch</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a routerLink="/Exec-Batch" style="color: crimson">Jobs Historique</a></li>
+      <li class="active"><a routerLink="/History-batch" style="color: crimson">Batch Historique</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: crimson">Batch
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a routerLink="/batch">Launch</a></li>
+          <li><a routerLink="/new-batch">Ajouter</a></li>
+          <li><a href="#">Modifier</a></li>
+        </ul>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li> <a  class="nav-link">{{authService.loggedUser}}</a></li>
+      <li class="nav-item dropdown">
+        <a class="dropdown-toggle glyphicon glyphicon-user" href="#" id="nav navbar-nav" data-toggle="dropdown">
+          Connexion
+        </a>
+        <div class="dropdown-menu">
+          <a *ngIf="!authService.isloggedIn" class="dropdown-item" routerLink = "login">Login<br><br></a>
+          <a *ngIf="authService.isloggedIn" class="dropdown-item"  (click) = "onLogout()">Logout<br><br></a>
+          <span></span>
+          <a class="dropdown-item" href="#">Profile</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="bg"></div>
+<router-outlet>
+
+</router-outlet>
+</body>

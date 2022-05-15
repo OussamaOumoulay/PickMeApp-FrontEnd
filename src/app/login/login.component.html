@@ -1,0 +1,38 @@
+
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+<div style ="height:31vh;width:900px;border: 2px solid silver;" class="container  text-center align-self-center">
+      <form >
+        <div class="alert alert-danger" *ngIf="erreur==1">
+          <strong>login ou mot de passe erronés..</strong>
+        </div>
+        <div class="form-group ">
+          <label >Nom Utilisateur :</label>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+          <input type="text" name="username"
+                 class="form-control text-center"
+                 [(ngModel)]="user.username" >
+        </div>
+        <div class="form-group">
+          <label >Mot de passe :</label>
+          <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+          <input type="password" name="password"
+                 [(ngModel)]="user.password" class="form-control text-center">
+        </div>
+        <div class="row justify-content-md-center">
+          <button type="button" (click)="onLoggedin()"
+                  class="btn btn-success">Connexion</button>
+        </div>
+      </form>
+    </div>
+
